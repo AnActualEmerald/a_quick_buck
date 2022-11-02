@@ -1,14 +1,18 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+use bevy::prelude::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+mod game;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+const WINDOW_SIZE: (f32, f32) = (400., 600.);
+
+pub fn run() {
+    App::new()
+        .insert_resource(WindowDescriptor {
+            title: "A Quick Buck".to_string(),
+            width: WINDOW_SIZE.0,
+            height: WINDOW_SIZE.1,
+            ..default()
+        })
+        .add_plugins(DefaultPlugins)
+        .add_plugin(game::Game)
+        .run();
 }
